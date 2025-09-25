@@ -114,14 +114,18 @@
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
           navigator.serviceWorker
-            .register("./sw.js")
+            .register("./sw.js", { scope: "./" })
             .then((registration) => {
-              console.log("SW registered: ", registration);
+              console.log("SW registered successfully: ", registration);
+              console.log("SW scope: ", registration.scope);
             })
             .catch((registrationError) => {
-              console.log("SW registration failed: ", registrationError);
+              console.error("SW registration failed: ", registrationError);
+              console.error("Error details: ", registrationError.message);
             });
         });
+      } else {
+        console.log("Service Worker not supported in this browser");
       }
 
       // Handle PWA install prompt
@@ -129,12 +133,7 @@
       window.addEventListener("beforeinstallprompt", (e) => {
         e.preventDefault();
         deferredPrompt = e;
-
-        // Show install button or notification
         console.log("PWA install prompt available");
-
-        // You can add a custom install button here
-        // showInstallButton();
       });
 
       // Handle PWA installed
