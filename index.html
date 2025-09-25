@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Let's Play Music</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="player">
+      <div class="cover"></div>
+      <nav>
+        <div class="left">
+          <div class="playlist-dropdown">
+            <i class="material-icons menu-icon">menu</i>
+            <h6>Playlist</h6>
+            <div class="dropdown-content">
+              <div class="dropdown-item" data-playlist="all">
+                <i class="material-icons">music_note</i>
+                <span>All Songs</span>
+              </div>
+              <div class="dropdown-item" data-playlist="bangla">
+                <i class="material-icons">language</i>
+                <span>Bangla</span>
+              </div>
+              <div class="dropdown-item" data-playlist="english">
+                <i class="material-icons">language</i>
+                <span>English</span>
+              </div>
+              <div class="dropdown-item" data-playlist="hindi">
+                <i class="material-icons">language</i>
+                <span>Hindi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <i class="material-icons search">search</i>
+          <i class="material-icons">queue_music</i>
+        </div>
+      </nav>
+      <div class="player-ui">
+        <div class="title">
+          <h3>Hello</h3>
+        </div>
+        <div class="small">
+          <i class="material-icons replay-btn">replay</i>
+          <p>Adele</p>
+          <div class="volume-control">
+            <i class="material-icons volume-icon">volume_up</i>
+            <div class="volume-slider-container">
+              <input
+                type="range"
+                class="volume-slider"
+                min="0"
+                max="100"
+                value="100"
+              />
+              <span class="volume-value">100%</span>
+            </div>
+          </div>
+        </div>
+        <div class="progress">
+          <div class="played">
+            <div class="circle"></div>
+          </div>
+        </div>
+        <div class="time-display">
+          <span class="current-time">0:00</span>
+          <span class="duration">0:00</span>
+        </div>
+        <div class="controls">
+          <i class="material-icons">skip_previous</i>
+          <i class="material-icons">play_arrow</i>
+          <i class="material-icons">skip_next</i>
+        </div>
+      </div>
+      <div class="btn"></div>
+      <div class="music">
+        <!-- Songs will be dynamically generated here -->
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
