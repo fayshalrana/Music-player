@@ -174,13 +174,22 @@ i {
 .player nav .right {
   display: flex;
 }
-.player nav .right i {
+.player nav .right .Logo {
+  display: flex;
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: .9;
+}
+/* .player nav .right i {
   cursor: pointer;
   color: white;
 }
 .player nav .right .search {
   padding-right: 10px;
-}
+} */
 .player .player-ui {
   position: relative;
   z-index: 3;
@@ -282,6 +291,11 @@ i {
 .player .player-ui .controls i {
   color: white;
   font-size: 32px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.player .player-ui .controls i:hover {
+  color: #f44336;
 }
 .player .btn {
   margin-left: auto;
