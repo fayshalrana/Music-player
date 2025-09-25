@@ -3,8 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Let's Play Music</title>
-    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <title>Music Player</title>
+
+    <!-- PWA Meta Tags -->
+    <meta
+      name="description"
+      content="A beautiful music player with playlist support"
+    />
+    <meta name="theme-color" content="#f44336" />
+    <meta name="background-color" content="#1a1b1e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Music Player" />
+    <meta name="msapplication-TileColor" content="#1a1b1e" />
+    <meta name="msapplication-config" content="browserconfig.xml" />
+
+    <!-- Icons and Manifest -->
+    <link rel="icon" href="./icons/icon-32x32.png" type="image/png" />
+    <link rel="apple-touch-icon" href="./icons/icon-192x192.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <!-- Fonts and Styles -->
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -86,5 +108,40 @@
       </div>
     </div>
     <script src="script.js"></script>
+
+    <!-- PWA Service Worker Registration -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("./sw.js")
+            .then((registration) => {
+              console.log("SW registered: ", registration);
+            })
+            .catch((registrationError) => {
+              console.log("SW registration failed: ", registrationError);
+            });
+        });
+      }
+
+      // Handle PWA install prompt
+      let deferredPrompt;
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+
+        // Show install button or notification
+        console.log("PWA install prompt available");
+
+        // You can add a custom install button here
+        // showInstallButton();
+      });
+
+      // Handle PWA installed
+      window.addEventListener("appinstalled", (evt) => {
+        console.log("PWA was installed");
+        deferredPrompt = null;
+      });
+    </script>
   </body>
 </html>

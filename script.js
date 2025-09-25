@@ -138,6 +138,11 @@ class MusicPlayer {
         this.nextSong();
       }
     });
+
+    // Handle window resize to recalculate progress bar
+    window.addEventListener("resize", () => {
+      this.updateProgress();
+    });
   }
 
   setupEventListeners() {
@@ -202,7 +207,7 @@ class MusicPlayer {
     if (song.cover) {
       coverElement.style.backgroundImage = `linear-gradient(rgb(0 0 0 / 60%), rgba(0, 0, 0, 0.4)), url(${song.cover})`;
       coverElement.style.backgroundSize = "cover";
-      coverElement.style.backgroundPosition = "center bottom";
+      coverElement.style.backgroundPosition = "center";
     }
   }
 
@@ -383,12 +388,22 @@ class MusicPlayer {
   updateProgress() {
     if (this.duration > 0) {
       const progressPercent = (this.currentTime / this.duration) * 100;
-      document.querySelector(".progress .played").style.width =
-        progressPercent + "%";
+      const progressBar = document.querySelector(".progress .played");
+      const circle = document.querySelector(".progress .played .circle");
 
-      const circlePosition = (progressPercent / 100) * (320 - 40); // 320px width - 40px margins
-      document.querySelector(".progress .played .circle").style.marginLeft =
-        circlePosition + "px";
+      // Update progress bar width
+      progressBar.style.width = progressPercent + "%";
+
+      // Calculate circle position based on actual progress bar width
+      const progressContainer = document.querySelector(".progress");
+      const containerWidth = progressContainer.offsetWidth;
+      const circlePosition = (progressPercent / 100) * containerWidth;
+
+      // Ensure circle doesn't go beyond the container
+      const maxPosition = containerWidth - 10; // 10px is half the circle width
+      const finalPosition = Math.min(circlePosition, maxPosition);
+
+      circle.style.marginLeft = finalPosition + "px";
     }
 
     // Update time display
@@ -565,7 +580,7 @@ class MusicPlayer {
       if (song.cover) {
         imgElement.style.backgroundImage = `url(${song.cover})`;
         imgElement.style.backgroundSize = "cover";
-        imgElement.style.backgroundPosition = "center center";
+        imgElement.style.backgroundPosition = "center";
       }
 
       // Add click event listener
